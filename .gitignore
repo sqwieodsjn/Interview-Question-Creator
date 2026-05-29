@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+
+uploads/
+vector_db/
+models/
+
+.env
+
+.idea/
+.vscode/
+
+*.log
