@@ -40,3 +40,7 @@ einops
 safetensors
 
 easyocr
+
+sentence-transformers
+faiss-cpu
+langchain-huggingface
