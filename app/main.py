@@ -150,10 +150,13 @@ def signup_user(
 
     if not success:
 
-        return {
-        "message":
-        "Email already exists"
-    }
+        return templates.TemplateResponse(
+        "signup.html",
+        {
+            "request": request,
+            "error": "Email already exists"
+        }
+    )
 
     return RedirectResponse(
     url="/login",

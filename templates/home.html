@@ -197,6 +197,7 @@ All Types
 <br>
 
 <button
+id="generateBtn"
 class="btn btn-primary btn-lg">
 
 🚀 Generate Questions
@@ -259,19 +260,26 @@ Users
 
     {% if questions %}
 
-    <div class="card shadow-sm mt-3">
+    <div class="generated-card">
 
-        <div class="card-body">
+<div class="d-flex align-items-center mb-3">
 
-            <pre style="white-space: pre-wrap; font-family: inherit;">
+<h4 class="mb-0">
+🎯 Generated Interview Questions
+</h4>
+
+</div>
+
+<hr>
+
+<div
+class="question-content">
 
 {{ questions }}
 
-            </pre>
+</div>
 
-        </div>
-
-    </div>
+</div>
 
     {% endif %}
 
@@ -293,6 +301,72 @@ Users
     {% endif %}
 
 </div>
+
+<!-- Loading Overlay -->
+
+<div
+id="loadingOverlay"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+z-index:9999;
+">
+
+<div
+class="d-flex flex-column justify-content-center align-items-center h-100 text-white">
+
+<div
+class="spinner-border"
+style="width:4rem;height:4rem;"
+role="status">
+
+</div>
+
+<h3 class="mt-4">
+Generating Questions...
+</h3>
+
+<p>
+Please wait while AI processes your document.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+const uploadForm = document.querySelector(
+'form[action="/generate"]'
+);
+
+const generateBtn = document.getElementById(
+"generateBtn"
+);
+
+uploadForm.addEventListener(
+"submit",
+function() {
+
+generateBtn.disabled = true;
+
+generateBtn.innerHTML =
+"⏳ Generating...";
+
+document.getElementById(
+"loadingOverlay"
+).style.display = "block";
+
+}
+);
+
+</script>
+
 </body>
 
 </html>
