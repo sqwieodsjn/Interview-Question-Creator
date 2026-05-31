@@ -2,7 +2,7 @@ from loaders.document_loader import load_document
 from text_splitter import split_documents
 
 documents = load_document(
-    "uploads/Pandas_Full_Notes.pdf"
+    "uploads/NUMPY-2.docx"
 )
 
 chunks = split_documents(documents)

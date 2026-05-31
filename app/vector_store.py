@@ -1,6 +1,6 @@
 from langchain_community.vectorstores import FAISS
 
-from embedding_model1 import get_embedding_model
+from app.embedding_model1 import get_embedding_model
 
 
 def create_vector_store(chunks):

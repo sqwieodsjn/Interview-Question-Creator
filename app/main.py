@@ -1,8 +1,10 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 import os
+from pydantic import BaseModel
+from app.rag_pipeline import run_rag_pipeline
 
-app = FastAPI(title = "Interview Question Creatot",
-              description = "Generate interview questions from  PDFs using LangChain and FAISS",
+app = FastAPI(title = "Interview Question Creator",
+              description = "Generate interview questions from any files using LangChain and FAISS",
               version = "1.0.0"
 )
 
@@ -17,6 +19,10 @@ ALLOWED_EXTENSIONS = {
     ".jpg",
     ".jpeg"
 }
+
+class QuestionRequest(BaseModel):
+    filename: str
+    query: str = "Generate interview questions"
 
 @app.get("/")
 def home():
@@ -37,4 +43,29 @@ async def upload_pdf(file:UploadFile = File(...)):
         "filename": file.filename,
         "file_type": file_extension,
         "message": "File uploaded successfully!"
+    }
+
+@app.post("/generate-questions")
+def generate_questions(request: QuestionRequest):
+
+    file_path = os.path.join(
+        UPLOAD_DIR,
+        request.filename
+    )
+
+    if not os.path.exists(file_path):
+
+        raise HTTPException(
+        status_code=400,
+        detail=f"Unsupported file type. Allowed types: {', '.join(ALLOWED_EXTENSIONS)}"
+        )
+
+    response = run_rag_pipeline(
+        file_path,
+        request.query
+    )
+
+    return {
+        "filename": request.filename,
+        "questions": response
     }

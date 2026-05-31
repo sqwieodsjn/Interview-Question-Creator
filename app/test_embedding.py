@@ -4,7 +4,7 @@ from vector_store import create_vector_store
 
 
 documents = load_document(
-    "uploads/Pandas_Full_Notes.pdf"
+    "uploads/NUMPY-2.docx"
 )
 
 chunks = split_documents(documents)
