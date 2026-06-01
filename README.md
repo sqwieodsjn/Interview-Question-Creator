@@ -96,6 +96,10 @@ python -m app.init_db
 uvicorn app.main:app --reload
 ```
 
+Landing_page:
+<img width="1347" height="597" alt="Screenshot 2026-06-01 124636" src="https://github.com/user-attachments/assets/85c8e6de-93ab-4666-8244-1d9f92bbdcfc" />
+
+
 ## Future Improvements
 
 * Deployment on Render
